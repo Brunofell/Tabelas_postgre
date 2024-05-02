@@ -49,3 +49,8 @@ CREATE TABLE consultas (
 SELECT * from medicos;
 SELECT * from pacientes;
 SELECT * from consultas;
+
+
+
+
+
