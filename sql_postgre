@@ -1,6 +1,3 @@
-CREATE DATABASE MedPro;
-
-
 CREATE TABLE Pacientes(
     id SERIAL PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
@@ -44,13 +41,3 @@ CREATE TABLE consultas (
     FOREIGN KEY (medico_id) REFERENCES medicos(id),
     FOREIGN KEY (paciente_id) REFERENCES pacientes(id)
 );
-
-
-SELECT * from medicos;
-SELECT * from pacientes;
-SELECT * from consultas;
-
-
-
-
-
