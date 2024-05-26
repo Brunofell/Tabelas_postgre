@@ -17,7 +17,7 @@ CREATE TABLE Medicos(
     telefone VARCHAR(15) NOT NULL,
     crm VARCHAR(20) NOT NULL,
     especialidade VARCHAR(30) NOT NULL,
-    endereco VARCHAR(160) NOT NULL
+    endereco VARCHAR(160) NOT NULL,
     ativo BOOLEAN
 );
 
