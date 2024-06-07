@@ -30,3 +30,6 @@ CREATE TABLE consultas (
     FOREIGN KEY (medico_id) REFERENCES medicos(id),
     FOREIGN KEY (paciente_id) REFERENCES pacientes(id)
 );
+
+ALTER TABLE Pacientes ADD COLUMN imagem VARCHAR(255);
+ALTER TABLE Medicos ADD COLUMN imagem VARCHAR(255);
