@@ -36,3 +36,8 @@ ALTER TABLE Medicos ADD COLUMN imagem VARCHAR(255);
 
 ALTER TABLE consultas ADD COLUMN especialidade VARCHAR(30);
 ALTER TABLE consultas ADD COLUMN nome VARCHAR(255);
+
+
+ALTER TABLE consultas ADD COLUMN nome_paciente VARCHAR(255)
+
+ALTER TABLE Pacientes ADD COLUMN ativo BOOLEAN;
