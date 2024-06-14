@@ -1,0 +1,209 @@
+SELECT * FROM pacientes;
+SELECT * FROM consultas;
+SELECT * FROM medicos;
+
+
+-- Inserir Paciente
+CREATE PROCEDURE InserirPaciente
+    @nome VARCHAR(255),
+    @email VARCHAR(255),
+    @senha VARCHAR(255),
+    @telefone VARCHAR(15),
+    @cpf VARCHAR(11),
+    @endereco VARCHAR(160),
+    @imagem VARCHAR(255),
+    @ativo BOOLEAN
+AS
+BEGIN
+    INSERT INTO Pacientes (nome, email, senha, telefone, cpf, endereco, imagem, ativo)
+    VALUES (@nome, @email, @senha, @telefone, @cpf, @endereco, @imagem, @ativo);
+END
+
+EXEC InserirPaciente 
+    @nome = 'João Silva',
+    @email = 'joao@example.com',
+    @senha = 'senha123',
+    @telefone = '(11) 9999-8888',
+    @cpf = '12345678901',
+    @endereco = 'Rua A, 123',
+    @imagem = NULL,  -- ou 'caminho/para/imagem.jpg' 
+    @ativo = 1;  -- 1 para ativo, 0 para inativo
+
+
+-- Atualizar Paciente
+CREATE PROCEDURE AtualizarPaciente
+    @id BIGINT,
+    @nome VARCHAR(255),
+    @email VARCHAR(255),
+    @senha VARCHAR(255),
+    @telefone VARCHAR(15),
+    @cpf VARCHAR(11),
+    @endereco VARCHAR(160),
+    @imagem VARCHAR(255),
+    @ativo BOOLEAN
+AS
+BEGIN
+    UPDATE Pacientes
+    SET nome = @nome,
+        email = @email,
+        senha = @senha,
+        telefone = @telefone,
+        cpf = @cpf,
+        endereco = @endereco,
+        imagem = @imagem,
+        ativo = @ativo
+    WHERE id = @id;
+END
+
+EXEC AtualizarPaciente 
+    @id = 1,  
+    @nome = 'Novo Nome',
+    @email = 'novonome@example.com',
+    @senha = 'novasenha',
+    @telefone = '(11) 98765-4321',
+    @cpf = '98765432109',
+    @endereco = 'Av. B, 456',
+    @imagem = 'novo_caminho/imagem.jpg',
+    @ativo = 1;
+
+
+-- Selecionar paciente por ID
+CREATE PROCEDURE SelecionarPacientePorID
+    @id BIGINT
+AS
+BEGIN
+    SELECT id, nome, email, senha, telefone, cpf, endereco, imagem, ativo
+    FROM Pacientes
+    WHERE id = @id;
+END
+
+EXEC SelecionarPacientePorID 
+    @id = 1;  
+
+
+-- Excluir Paciente
+CREATE PROCEDURE ExcluirPaciente
+    @id BIGINT
+AS
+BEGIN
+    DELETE FROM Pacientes
+    WHERE id = @id;
+END
+
+EXEC ExcluirPaciente 
+    @id = 1;  -- ID do paciente que você deseja excluir
+
+
+-- Inserir Medico
+CREATE PROCEDURE InserirMedico
+    @nome VARCHAR(255),
+    @email VARCHAR(255),
+    @senha VARCHAR(255),
+    @telefone VARCHAR(15),
+    @crm VARCHAR(20),
+    @especialidade VARCHAR(30),
+    @endereco VARCHAR(160),
+    @imagem VARCHAR(255),
+    @ativo BOOLEAN
+AS
+BEGIN
+    INSERT INTO Medicos (nome, email, senha, telefone, crm, especialidade, endereco, imagem, ativo)
+    VALUES (@nome, @email, @senha, @telefone, @crm, @especialidade, @endereco, @imagem, @ativo);
+END
+
+--Atualizar Medico
+CREATE PROCEDURE AtualizarMedico
+    @id BIGINT,
+    @nome VARCHAR(255),
+    @email VARCHAR(255),
+    @senha VARCHAR(255),
+    @telefone VARCHAR(15),
+    @crm VARCHAR(20),
+    @especialidade VARCHAR(30),
+    @endereco VARCHAR(160),
+    @imagem VARCHAR(255),
+    @ativo BOOLEAN
+AS
+BEGIN
+    UPDATE Medicos
+    SET nome = @nome,
+        email = @email,
+        senha = @senha,
+        telefone = @telefone,
+        crm = @crm,
+        especialidade = @especialidade,
+        endereco = @endereco,
+        imagem = @imagem,
+        ativo = @ativo
+    WHERE id = @id;
+END
+
+-- Selecionar Medico por id
+CREATE PROCEDURE SelecionarMedicoPorID
+    @id BIGINT
+AS
+BEGIN
+    SELECT id, nome, email, senha, telefone, crm, especialidade, endereco, imagem, ativo
+    FROM Medicos
+    WHERE id = @id;
+END
+
+-- Excluir medico por id
+CREATE PROCEDURE ExcluirMedico
+    @id BIGINT
+AS
+BEGIN
+    DELETE FROM Medicos
+    WHERE id = @id;
+END
+
+-- inserir consulta
+CREATE PROCEDURE InserirConsulta
+    @medico_id BIGINT,
+    @paciente_id BIGINT,
+    @data TIMESTAMP,
+    @especialidade VARCHAR(30),
+    @nome_paciente VARCHAR(255)
+AS
+BEGIN
+    INSERT INTO consultas (medico_id, paciente_id, data, especialidade, nome_paciente)
+    VALUES (@medico_id, @paciente_id, @data, @especialidade, @nome_paciente);
+END
+
+-- Atualizar comnsulta
+CREATE PROCEDURE AtualizarConsulta
+    @id BIGINT,
+    @medico_id BIGINT,
+    @paciente_id BIGINT,
+    @data TIMESTAMP,
+    @especialidade VARCHAR(30),
+    @nome_paciente VARCHAR(255)
+AS
+BEGIN
+    UPDATE consultas
+    SET medico_id = @medico_id,
+        paciente_id = @paciente_id,
+        data = @data,
+        especialidade = @especialidade,
+        nome_paciente = @nome_paciente
+    WHERE id = @id;
+END
+
+-- Selecionar consulta por id
+CREATE PROCEDURE SelecionarConsultaPorID
+    @id BIGINT
+AS
+BEGIN
+    SELECT id, medico_id, paciente_id, data, especialidade, nome_paciente
+    FROM consultas
+    WHERE id = @id;
+END
+
+-- Excluir consulta
+CREATE PROCEDURE ExcluirConsulta
+    @id BIGINT
+AS
+BEGIN
+    DELETE FROM consultas
+    WHERE id = @id;
+END
